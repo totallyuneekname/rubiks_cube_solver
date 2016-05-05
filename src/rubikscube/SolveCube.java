@@ -25,11 +25,11 @@ import java.util.Scanner;
 public class SolveCube {
 
     public void solveCross() {
-        //This method will solve the cross of the cube
+        //This method will solve the first cross of the cube
     }
 
     public void solveSides() {
-        //This method will solve the sides of the cube, using algorithms
+        //This method will solve the sides of the cube, using ALGORITHMS
     }
 
     public void solveTopCross() {
@@ -47,6 +47,7 @@ public class SolveCube {
     public static void main(String[] args) {
         Cube rubik = new Cube("w", "b");
         Scanner reader = new Scanner(System.in);
+        // Some of the following code that parses commands is really messy. I'm not changing it though because it works and ultimately doesn't matter :)
         while (true) {
             String input = reader.nextLine();
             input = input.toUpperCase();
