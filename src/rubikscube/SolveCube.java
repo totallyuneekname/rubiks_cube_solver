@@ -23,37 +23,53 @@ import java.util.Scanner;
  * @author student
  */
 public class SolveCube {
-    
+
     public void solveCross() {
         //This method will solve the cross of the cube
     }
-    
+
     public void solveSides() {
         //This method will solve the sides of the cube, using algorithms
     }
-    
+
     public void solveTopCross() {
         //This method will solve the top cross of the cube
     }
-    
+
     public void solveTopCorners() {
         //This method will solve the top corners of the cube (but they may not be in the right positions!)
     }
-    
+
     public void solveHeadlights() {
         //This method will correctly permutate the top corners.
     }
 
-    
     public static void main(String[] args) {
-        Cube rubik = new Cube();
+        Cube rubik = new Cube("w", "b");
         Scanner reader = new Scanner(System.in);
         while (true) {
-        String input = reader.nextLine();
-        if (input.equals("print")) rubik.printCube();
-        else if (input.equals("quit")) break;
-        else if (input.substring(0, input.length()-1).equals("front ")) rubik.changeFront(input.substring(input.length()-1));
-        else rubik.makeMove(input);
+            String input = reader.nextLine();
+            input = input.toUpperCase();
+            if (input.length() >= 5) {
+                if (input.substring(0, 5).equals("PRINT")) {
+                    if (input.length() > 5) {
+                        rubik.printSide(input.substring(6, 7));
+                    } else {
+                        rubik.printCube();
+                    }
+                }
+                if (input.substring(0, input.length() - 1).equals("FRONT ")) {
+                    rubik.changeFront(input.substring(input.length() - 1));
+                }
+            } else if (input.substring(0, input.length() - 1).equals("TOP ")) {
+                    rubik.changeTop(input.substring(input.length() - 1));
+            } else if (input.substring(0, input.length() - 1).equals("GET INT ")) {
+                    System.out.println("int values is: " + rubik.getSideInt(input.substring(input.length() - 1)));
+            } else if (input.equals("QUIT")) {
+                break;
+            } else {
+                rubik.parseMove(input);
+            }
         }
     }
 }

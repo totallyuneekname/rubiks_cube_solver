@@ -30,8 +30,8 @@ public class Color {
     }
     public Color(String color) {
         color = color.toUpperCase();
-        for (int i = 1; i <= colorLetters.length; i++) {
-            if (colorLetters[i-1].equals(color)) {
+        for (int i = 0; i < colorLetters.length; i++) {
+            if (colorLetters[i].equals(color)) {
                 colorValue = i;
                 return;
             }
@@ -40,7 +40,7 @@ public class Color {
     }
     
     public String getColor() {
-        return this.colorLetters[this.colorValue - 1];
+        return this.colorLetters[this.colorValue];
     }
     public int getIntegerVal() {
         return this.colorValue;
