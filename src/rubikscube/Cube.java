@@ -84,14 +84,7 @@ public class Cube {
         }
         return -1;
     }
-
-    public int getSideInt(String side) {
-        for (int i = 0; i < 6; i++) {
-            if (colorValues[i][1][1].getColor().equals(side)) return i;
-        }
-        return -1;
-    }
-
+    
     public void parseMove(String move) {
         int numOfRotations = 1;
         boolean isReverse = false;
@@ -196,13 +189,12 @@ public class Cube {
             System.out.println("            —————————————");
         }
     }
-    public void printSide(String side) {
-        int sideNum = getSideInt(side);
+    public void printSide(int side) {
         System.out.println("—————————————");
         for (int i = 0; i < 3; i++) {
             String nextLine = "|";
             for (int j = 0; j < 3; j++) {
-                nextLine += (" " + colorValues[sideNum][i][j].getColor() + " |");
+                nextLine += (" " + colorValues[side][i][j].getColor() + " |");
             }
             System.out.println(nextLine);
             System.out.println("—————————————");

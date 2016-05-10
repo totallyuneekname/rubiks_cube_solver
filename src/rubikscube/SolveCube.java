@@ -43,7 +43,7 @@ public class SolveCube {
     public void solveHeadlights() {
         //This method will correctly permutate the top corners.
     }
-
+    
     public static void main(String[] args) {
         Cube rubik = new Cube("w", "b");
         Scanner reader = new Scanner(System.in);
@@ -54,7 +54,7 @@ public class SolveCube {
             if (input.length() >= 5) {
                 if (input.substring(0, 5).equals("PRINT")) {
                     if (input.length() > 5) {
-                        rubik.printSide(input.substring(6, 7));
+                        rubik.printSide(Integer.parseInt(input.substring(6, 7)));
                     } else {
                         rubik.printCube();
                     }
@@ -64,8 +64,6 @@ public class SolveCube {
                 }
             } else if (input.substring(0, input.length() - 1).equals("TOP ")) {
                     rubik.changeTop(input.substring(input.length() - 1));
-            } else if (input.substring(0, input.length() - 1).equals("GET INT ")) {
-                    System.out.println("int values is: " + rubik.getSideInt(input.substring(input.length() - 1)));
             } else if (input.equals("QUIT")) {
                 break;
             } else {
