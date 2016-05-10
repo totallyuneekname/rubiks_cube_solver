@@ -24,10 +24,11 @@ public class Cube {
 
     private Color[][][] colorValues = new Color[6][3][3];
     Color currentFront;
-    Color currentTop; // these will CHANGE
-    Color[][] axes = {{new Color("w"), new Color("o"), new Color("y"), new Color("r")},
-    {new Color("w"), new Color("b"), new Color("y"), new Color("g")},
-    {new Color("b"), new Color("r"), new Color("g"), new Color("o")}};
+    Color currentTop;
+    //Axes are in clockwise order around the cube. axes[axis][4] is the top color.
+    Color[][] axes = {{new Color("w"), new Color("o"), new Color("y"), new Color("r"), new Color("g")},
+    {new Color("w"), new Color("b"), new Color("y"), new Color("g"), new Color("o")},
+    {new Color("b"), new Color("r"), new Color("g"), new Color("o"), new Color("y")}};
 
     public Cube(String front, String top) {
         currentFront = new Color(front);
@@ -53,6 +54,37 @@ public class Cube {
         currentTop = new Color(newTop);
     }
     
+    public int getCorrespondingSide(int cubeSide) {
+        if (cubeSide == (currentFront.getIntegerVal())) return currentFront.getIntegerVal();
+        if (cubeSide == (currentTop.getIntegerVal())) return currentTop.getIntegerVal();
+        Color[] outwardAxis = axes[0];
+        for (Color[] axis : axes) {
+            boolean hasFront = false;
+            for (Color s : axis) {
+                if (s.equals(currentFront)) hasFront = true;
+            }
+            if (!hasFront) {
+                outwardAxis = axis;
+            }
+        }
+        int frontIndex = 0;
+        for (int i = 0; i < 4; i++) {
+            if (outwardAxis[i].equals(currentFront)) frontIndex = i;
+        }
+        System.out.println(frontIndex);
+        if (outwardAxis[4].equals(currentTop)) {
+            for (int i = 0; i < 4; i++) {
+                int sideIndex = i - frontIndex;
+                System.out.println(frontIndex);
+            }
+        } else {
+            for (int i = 0; i < 4; i--) {
+                
+            }
+        }
+        return -1;
+    }
+
     public int getSideInt(String side) {
         for (int i = 0; i < 6; i++) {
             if (colorValues[i][1][1].getColor().equals(side)) return i;
@@ -140,7 +172,7 @@ public class Cube {
             System.out.println("            —————————————");
             String nextLine = "            |";
             for (int j = 0; j < 3; j++) {
-                nextLine += (" " + colorValues[currentTop.getIntegerVal()][i][j].getColor() + " |");
+                nextLine += (" " + colorValues[getCorrespondingSide(4)][i][j].getColor() + " |");
             }
             System.out.println(nextLine);
         }
@@ -149,7 +181,7 @@ public class Cube {
             String nextLine = "|";
             for (int j = 1; j < 5; j++) {
                 for (int k = 0; k < 3; k++) {
-                    nextLine += (" " + colorValues[j][i][k].getColor() + " |");
+                    nextLine += (" " + colorValues[getCorrespondingSide(j)][i][k].getColor() + " |");
                 }
             }
             System.out.println(nextLine);
@@ -158,7 +190,7 @@ public class Cube {
         for (int i = 0; i < 3; i++) {
             String nextLine = "            |";
             for (int j = 0; j < 3; j++) {
-                nextLine += (" " + colorValues[5][i][j].getColor() + " |");
+                nextLine += (" " + colorValues[getCorrespondingSide(5)][i][j].getColor() + " |");
             }
             System.out.println(nextLine);
             System.out.println("            —————————————");
@@ -166,7 +198,6 @@ public class Cube {
     }
     public void printSide(String side) {
         int sideNum = getSideInt(side);
-        //System.out.println("side int is ");
         System.out.println("—————————————");
         for (int i = 0; i < 3; i++) {
             String nextLine = "|";
